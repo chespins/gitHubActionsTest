@@ -20,3 +20,5 @@ jobs:
           use-only-tar-bz2: true
       - name: conda lib List
         run: conda list
+      - name: python version
+        run: python --version
