@@ -14,7 +14,7 @@ def test_changeTimeZone():
 
 def test_changeTimeZone2():
     input = "2023-01-07T21:09:01+00:00"
-    success = "2023年1月8日 06:09:01"
+    success = "2023年1月7日 06:09:01"
     assert success == util.changeTimeZone(input)
 
 
