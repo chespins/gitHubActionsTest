@@ -8,7 +8,7 @@ on:
 
 jobs:
   conda-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup Python
@@ -18,7 +18,9 @@ jobs:
           auto-activate-base: false
           auto-update-conda: true
           use-only-tar-bz2: true
-      
+          channels: conda-forge
+          channel-priority: true
+    
       - name: conda lib List
         run: conda list
       
