@@ -45,3 +45,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: artifacts
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        with:
+          junit_files: results/*.xml
