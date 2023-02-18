@@ -92,4 +92,5 @@ dependencies:
   - pip:
     - kivy-deps-angle==0.3.3
     - kivy-deps-sdl2==0.5.1
-prefix: C:\Users\takah\anaconda3\envs\kvpyan
+
+##  prefix: C:\Users\takah\anaconda3\envs\kvpyan
