@@ -17,6 +17,11 @@ def test_changeTimeZone2():
     success = "2023年1月8日 06:09:01"
     assert success == util.changeTimeZone(input)
 
+def test_changeTimeZone2():
+    input = "2023-01-0721:09:01+00:00"
+    
+    with pytest.raises(ValueError) as e:
+        util.changeTimeZone(input)
 
 if __name__ == "__main__":
     unittest.main()
