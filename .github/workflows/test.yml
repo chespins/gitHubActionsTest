@@ -23,9 +23,6 @@ jobs:
     
       - name: conda lib List
         run: conda list
-      
-      - name: python version
-        run: python --version
 
       - name: PyTest
         run: |
