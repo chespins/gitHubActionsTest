@@ -1,5 +1,5 @@
 # coding:utf-8
-import unittest
+import pytest
 import sys
 import os
 
@@ -24,4 +24,4 @@ def test_changeTimeZone3():
         util.changeTimeZone(input)
 
 if __name__ == "__main__":
-    unittest.main()
+    pass
