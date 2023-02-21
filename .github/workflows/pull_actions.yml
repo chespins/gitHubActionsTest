@@ -35,7 +35,7 @@ jobs:
           junitxml-path: results/pytest.xml
 
       - name: pyinstaller package
-        run: python -m pyinstaller testcon.spec
+        run: pyinstaller testcon.spec
 
       - uses: actions/upload-artifact@v2
         with:
