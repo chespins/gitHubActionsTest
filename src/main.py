@@ -5,7 +5,7 @@ from kivy.config import Config
 Config.set('graphics', 'multisamples', '0')
 Config.set("kivy","log_dir","./log/")
 
-os.environ['KIVY_GL_BACKEND'] = 'glew'
+os.environ['KIVY_GL_BACKEND'] = 'mock'
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
 
 from kivy.logger import Logger
