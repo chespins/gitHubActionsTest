@@ -3,11 +3,10 @@ import os
 from util import util
 from kivy.config import Config
 Config.set('graphics', 'multisamples', '0')
-Config.set("kivy","log_dir",util.findDataFile(""))
+Config.set("kivy","log_dir","./log/")
 
-os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+os.environ['KIVY_GL_BACKEND'] = 'glew'
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
-
 
 from kivy.logger import Logger
 from kivy.logger import LOG_LEVELS
@@ -15,7 +14,6 @@ from kivy.logger import LOG_LEVELS
 Logger.setLevel(LOG_LEVELS["debug"])
 Config.set('graphics', 'width', '640')
 Config.set('graphics', 'height', '480')
-Logger.debug("util.findDataFile("")" + util.findDataFile(""))
 
 from kivy.app import App
 from kivy.core.text import LabelBase
