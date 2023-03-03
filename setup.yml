@@ -96,4 +96,5 @@ dependencies:
   - zstd=1.5.2=h6255e5f_4
   - pip:
     - kivy-deps-angle==0.3.3
+    - kivy-deps-gstreamer==0.3.3
     - kivy-deps-sdl2==0.5.1
