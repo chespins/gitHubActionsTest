@@ -6,7 +6,6 @@ Config.set('graphics', 'multisamples', '0')
 Config.set("kivy","log_dir","./log/")
 
 os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
-os.environ['KIVY_NO_CONSOLELOG'] = '1'
 
 from kivy.logger import Logger
 from kivy.logger import LOG_LEVELS
