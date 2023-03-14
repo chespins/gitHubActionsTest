@@ -35,7 +35,7 @@ jobs:
           pytest-coverage-path: results/pytest-coverage.txt
           junitxml-path: results/pytest.xml
 
-      - name: pyinstaller package
+      - name: pyinstaller package test
         run: pyinstaller testcon.spec
 
       - uses: actions/upload-artifact@v2
