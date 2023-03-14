@@ -1,0 +1,44 @@
+name: Action Sample
+
+on:
+  - pull_request
+
+jobs:
+  conda-test:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          environment-file: ./setup.yml
+          auto-activate-base: false
+          auto-update-conda: true
+          use-only-tar-bz2: true
+          channels: conda-forge
+          channel-priority: true
+    
+      - name: conda lib List
+        run: conda list
+
+      - name: PyTest
+        run: |
+          python -m pytest --junit-xml ./pytest.xml | tee ./pytest-coverage.txt
+        continue-on-error: true
+  
+      # テスト結果をプルリクにコメントする
+      - name: Pytest coverage comment
+        if: always()
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: results/pytest-coverage.txt
+          junitxml-path: results/pytest.xml
+
+      - name: pyinstaller package test
+        run: pyinstaller testcon.spec
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: name-of-artifact
+          path: src/dist
