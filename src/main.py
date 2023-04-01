@@ -23,6 +23,7 @@ from kivy.uix.screenmanager import ScreenManager
 from view import menu as mu
 from constant.systemconstant import FONT_DIR
 from constant.systemconstant import FONT_FILE_NAME
+from variable.setappdata import AppCommonData
 
 
 resource_add_path(util.findDataFile(FONT_DIR))
@@ -31,6 +32,7 @@ LabelBase.register(DEFAULT_FONT, FONT_FILE_NAME)
 class TetoconeScoreApp(App):
     def build(self):
         Logger.debug("起動")
+        self.data = AppCommonData()
         self.sm = ScreenManager()
         self.sm.add_widget(
                 mu.MenuScreen(
