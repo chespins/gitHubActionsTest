@@ -4,38 +4,41 @@ on:
   - pull_request
 
 jobs:
-  pytest-windows:
-    runs-on: windows-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          environment-file: ./setup.yml
-          auto-activate-base: false
-          auto-update-conda: true
-          use-only-tar-bz2: true
-          channels: conda-forge
-          channel-priority: true
+  # pytest-windows:
+  #   runs-on: windows-latest
+  #   timeout-minutes: 60
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Setup Python
+  #       uses: conda-incubator/setup-miniconda@v2
+  #       with:
+  #         environment-file: ./setup.yml
+  #         auto-activate-base: false
+  #         auto-update-conda: true
+  #         use-only-tar-bz2: true
+  #         channels: conda-forge
+  #         channel-priority: true
     
-      - name: conda lib List
-        run: conda list
+  #     - name: conda lib List
+  #       run: conda list
 
-      - name: PyTest
-      - name: PyTest
+      - name: run PyTest
         run: |
-          python -m pytest --junit-xml ././pytest.xml | tee ././pytest-coverage.txt
-        continue-on-error: true
-        continue-on-error: true
+          python -m pytest --junit-xml pytest.xml | tee pytest-coverage.txt
   
-      # テスト結果をプルリクにコメントする
-      - name: Pytest coverage comment
+      - name: Upload Unit Test Results
         if: always()
-        uses: MishaKav/pytest-coverage-comment@main
+        uses: actions/upload-artifact@v3
         with:
-          pytest-coverage-path: results/pytest-coverage.txt
-          junitxml-path: results/pytest.xml
+          name: Unit Test Results (windows)
+          path: ./*.xml
+      
+        # テスト結果をプルリクにコメントする
+      - name: Publish Unit Test Results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          junit_files: ./*.xml
 
   pyinstaller-package:
     runs-on: ubuntu-latest
