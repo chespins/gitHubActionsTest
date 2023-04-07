@@ -40,7 +40,7 @@ jobs:
         with:
           junit_files: ./*.xml
 
-  pyinstaller package:
+  pyinstaller-package:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -56,11 +56,3 @@ jobs:
       with:
         name: name-of-artifact
         path: src/dist/windows
-
-      # - name: pyinstaller test
-      #   run: pyinstaller testcon.spec
-
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: name-of-artifact
-      #     path: src/dist
