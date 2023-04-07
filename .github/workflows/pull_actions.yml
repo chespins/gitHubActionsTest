@@ -22,20 +22,18 @@ jobs:
       - name: conda lib List
         run: conda list
 
-      - name: PyTest
-        steps:
-        - name: run PyTest
-          run: |
-            python -m pytest --junit-xml ./pytest.xml | tee ./pytest-coverage.txt
-          continue-on-error: true
+      - name: run PyTest
+        run: |
+          python -m pytest --junit-xml ./pytest.xml | tee ./pytest-coverage.txt
+        continue-on-error: true
   
         # テスト結果をプルリクにコメントする
-        - name: Pytest coverage comment
-          if: always()
-          uses: MishaKav/pytest-coverage-comment@main
-          with:
-            pytest-coverage-path: results/pytest-coverage.txt
-            junitxml-path: results/pytest.xml
+      - name: Pytest coverage comment
+        if: always()
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
 
       # - name: pyinstaller package
       #   run: pyinstaller testcon.spec
