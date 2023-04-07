@@ -44,7 +44,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          environment-file: ./setup.yml
+          auto-activate-base: false
+          auto-update-conda: true
+          use-only-tar-bz2: true
+          channels: conda-forge
+          channel-priority: true
 
       - name: Package Application
         uses: JackMcKew/pyinstaller-action-windows@main
