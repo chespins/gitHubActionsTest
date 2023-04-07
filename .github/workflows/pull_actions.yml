@@ -22,23 +22,23 @@ jobs:
   #     - name: conda lib List
   #       run: conda list
 
-      - name: run PyTest
-        run: |
-          python -m pytest --junit-xml pytest.xml | tee pytest-coverage.txt
+  #     - name: run PyTest
+  #       run: |
+  #         python -m pytest --junit-xml pytest.xml | tee pytest-coverage.txt
   
-      - name: Upload Unit Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Unit Test Results (windows)
-          path: ./*.xml
+  #     - name: Upload Unit Test Results
+  #       if: always()
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: Unit Test Results (windows)
+  #         path: ./*.xml
       
-        # テスト結果をプルリクにコメントする
-      - name: Publish Unit Test Results
-        if: always()
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          junit_files: ./*.xml
+  #       # テスト結果をプルリクにコメントする
+  #     - name: Publish Unit Test Results
+  #       if: always()
+  #       uses: EnricoMi/publish-unit-test-result-action@v2
+  #       with:
+  #         junit_files: ./*.xml
 
   pyinstaller-package:
     runs-on: ubuntu-latest
@@ -46,24 +46,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
-      with:
-        path: src
+      - name: Package Application
+        uses: JackMcKew/pyinstaller-action-windows@main
+        with:
+          path: src
 
 
+<<<<<<< HEAD
     - uses: actions/upload-artifact@v2
       with:
         name: name-of-artifact
         path: src/dist/windows
-<<<<<<< HEAD
-
-      # - name: pyinstaller package
-      #   run: pyinstaller testcon.spec
-
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: name-of-artifact
-      #     path: src/dist
-=======
->>>>>>> 8475ba2 (test)
