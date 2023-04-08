@@ -53,8 +53,7 @@ jobs:
           path: src
 
 
-<<<<<<< HEAD
-    - uses: actions/upload-artifact@v2
-      with:
-        name: name-of-artifact
-        path: src/dist/windows
+      - uses: actions/upload-artifact@v2
+        with:
+          name: name-of-artifact
+          path: src/dist/windows
