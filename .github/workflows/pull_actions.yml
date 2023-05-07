@@ -27,7 +27,7 @@ jobs:
 
       - name: run PyTest
         run: |
-          pytest test --cov-report=term-missing --junitxml=./pytest.xml | tee ./pytest-coverage.txt     
+          pytest tests --cov-report=term-missing --junitxml=./pytest.xml | tee ./pytest-coverage.txt     
   
       - name: Upload Unit Test Results
         if: always()
