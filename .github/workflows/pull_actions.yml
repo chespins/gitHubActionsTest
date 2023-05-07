@@ -27,7 +27,7 @@ jobs:
 
       - name: run PyTest
         run: |
-          pytest tests --cov-report=term-missing --junitxml=./pytest.xml | tee ./pytest-coverage.txt     
+          python -m pytest --cov-report=term-missing --junitxml=./pytest.xml | tee ./pytest-coverage.txt  
   
       - name: Upload Unit Test Results
         if: always()
@@ -48,7 +48,7 @@ jobs:
         uses: MishaKav/pytest-coverage-comment@main
         if: always()
         with:
-          pytest-coverage-path: ./pytest-coverage.txt
+          pytest-coverage-path: pytest-coverage.txt
           junitxml-path: ./pytest.xml
 
   # pyinstaller-package:
