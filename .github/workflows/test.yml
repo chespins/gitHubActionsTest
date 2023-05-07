@@ -26,7 +26,7 @@ jobs:
 
       - name: PyTest
         run: |
-          python -m pytest --junit-xml results/pytest.xml | tee ./pytest-coverage.txt
+          python -m pytest --junit-xml results/pytest.xml | tee pytest-coverage.txt
         # continue-on-error: true
 
       # テスト結果の表示
