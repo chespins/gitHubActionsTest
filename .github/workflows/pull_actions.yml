@@ -49,7 +49,7 @@ jobs:
         if: always()
         with:
           pytest-coverage-path: pytest-coverage.txt
-          junitxml-path: ./pytest.xml
+          junitxml-path: pytest.xml
 
   # pyinstaller-package:
   #   runs-on: ubuntu-latest
