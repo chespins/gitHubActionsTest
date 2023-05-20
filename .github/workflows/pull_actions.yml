@@ -4,69 +4,20 @@ on:
   - pull_request
 
 jobs:
-  pytest-windows:
+  package:
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          environment-file: ./setup.yml
-          auto-activate-base: false
-          auto-update-conda: true
-          use-only-tar-bz2: true
-          channels: conda-forge
-          channel-priority: true
-    
-      - name: conda lib List
-        run: conda list
-        
-      - name: pip install
-        run: pip install pytest-cov
+      - name: checkout
+        uses: actions/checkout@v3
 
-      - name: run PyTest
+      - name: Package Application
         run: |
-          python -m pytest --cov-report=term-missing --junitxml=./pytest.xml | tee ./pytest-coverage.txt  
-  
-      - name: Upload Unit Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
+          python -m pyinstaller testcon.spec
+
+
+      - name: upload Package
+        uses: actions/upload-artifact@v2
         with:
-          name: Unit Test Results (windows)
-          path: ./*.xml
-      
-        # テスト結果をプルリクにコメントする
-      # - name: Publish Unit Test Results
-      #   if: always()
-      #   uses: EnricoMi/publish-unit-test-result-action/composite@v2
-      #   with:
-      #     junit_files: ./*.xml
-
-      # テスト結果をプルリクにコメントする
-      - name: Pytest coverage comment
-        uses: MishaKav/pytest-coverage-comment@main
-        if: always()
-        with:
-          pytest-coverage-path: pytest-coverage.txt
-          junitxml-path: pytest.xml
-
-  # pyinstaller-package:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 60
-  #   needs: pytest-windows
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Package Application
-  #       uses: JackMcKew/pyinstaller-action-windows@main
-  #       with:
-  #         path: src
-
-
-  #     - name: upload Package
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: name-of-artifact
-  #         path: src/dist/windows
+          name: name-of-artifact
+          path: src/dist/windows
