@@ -44,7 +44,7 @@ jobs:
 
       - name: Download Artifacts
         if: always()
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: artifacts
 
@@ -82,7 +82,7 @@ jobs:
 
 
       - name: upload Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: name-of-artifact
+          name: windowsApp
           path: dist/*
