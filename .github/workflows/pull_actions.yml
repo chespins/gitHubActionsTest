@@ -1,6 +1,5 @@
 name: Action Sample
 
-
 permissions:
   checks: write
   pull-requests: write
@@ -27,9 +26,6 @@ jobs:
     
       - name: conda lib List
         run: conda list
-        
-      - name: pip install
-        run: pip install pytest-cov
 
       - name: run PyTest
         run: |
