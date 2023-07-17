@@ -1,40 +1,47 @@
+# -*- coding: utf-8 -*-
 import os
-import sys
-import threading
-import tkinter as tk
-from tkinter import filedialog
+from util import util
+from kivy.config import Config
+Config.set('graphics', 'multisamples', '0')
+Config.set("kivy","log_dir","./log/")
+
+os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+
+from kivy.logger import Logger
+from kivy.logger import LOG_LEVELS
+
+Logger.setLevel(LOG_LEVELS["debug"])
+Config.set('graphics', 'width', '640')
+Config.set('graphics', 'height', '480')
+
+from kivy.app import App
+from kivy.core.text import LabelBase
+from kivy.core.text import DEFAULT_FONT
+from kivy.resources import resource_add_path
+from kivy.uix.screenmanager import ScreenManager
+
+from view import menu as mu
+from constant.systemconstant import FONT_DIR
+from constant.systemconstant import FONT_FILE_NAME
+from variable.setappdata import AppCommonData
 
 
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
-        self.master.title('テストツール')
-        self.master.geometry('500x250')
-        self.master.resizable(False, False)
- 
-        frame1 = tk.Frame(self.master, width=500, height=90, borderwidth=2, relief='solid')
-        frame2 = tk.Frame(self.master, width=500, height=40, borderwidth=2, relief='solid')
-        frame3 = tk.Frame(self.master, width=500, height=120, borderwidth=2, relief='solid')
-    
-        frame1.propagate(False)
-        frame2.propagate(False)
-        frame3.propagate(False) 
-        
-        frame1.grid(row=0, column=0)
-        frame2.grid(row=1, column=0)
-        frame3.grid(row=2, column=0)
- 
-        # frame
-        self.button_quit = tk.Button(frame3, text='終了', command=sys.exit)
-        self.button_quit.pack(side=tk.TOP)
+resource_add_path(util.findDataFile(FONT_DIR))
+LabelBase.register(DEFAULT_FONT, FONT_FILE_NAME)
 
-
-def main():
-    win = tk.Tk()
-    app = Application(master=win)
-    app.mainloop()
+class TetoconeScoreApp(App):
+    def build(self):
+        Logger.debug("起動")
+        self.data = AppCommonData()
+        self.sm = ScreenManager()
+        self.sm.add_widget(
+                mu.MenuScreen(
+                        name='menu'
+                    )
+            )
+        Logger.debug("起動成功")
+        return self.sm
 
 
 if __name__ == '__main__':
-    main()
+    TetoconeScoreApp().run()
